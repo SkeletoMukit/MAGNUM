@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public Transform trPlayer;
     public Transform trCamera;
+    public Transform trBulletSpawn;
 
     private float ZAxisInput;
     private float ZAxisVelocity;
@@ -169,7 +170,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButton(0) && rateOfFireRemainig <= 0)
         {
             rateOfFireRemainig = rateOfFire;
-            Instantiate(projectile, trCamera.position, trCamera.rotation);
+            Instantiate(projectile, trBulletSpawn.position, trBulletSpawn.rotation);
         }
 
 

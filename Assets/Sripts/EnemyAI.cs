@@ -114,6 +114,7 @@ public class EnemyAI : MonoBehaviour
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
         controller.SimpleMove(velocity);
         transform.LookAt(targetPosition);
+
         // If you are writing a 2D game you should remove the CharacterController code above and instead move the transform directly by uncommenting the next line
         // transform.position += velocity * Time.deltaTime;
     }

@@ -1556,6 +1556,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
+      propertyPath: agroDistance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
+        type: 3}
       propertyPath: targetPosition
       value: 
       objectReference: {fileID: 1783027501}
@@ -1572,7 +1577,7 @@ PrefabInstance:
     - target: {fileID: 7012250954659162900, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 73.85295
+      value: 73.909
       objectReference: {fileID: 0}
     - target: {fileID: 7012250954659162900, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}

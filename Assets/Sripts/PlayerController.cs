@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    #region Variables
     public Rigidbody rbPlayer;
 
     public Transform trPlayer;
@@ -12,11 +15,11 @@ public class PlayerController : MonoBehaviour
 
     private float ZAxisInput;
     private float ZAxisVelocity;
-    private int ZAxisCanSpeedUp;
+    private byte ZAxisCanSpeedUp;
 
     private float XAxisInput;
     private float XAxisVelocity;
-    private int XAxisCanSpeedUp;
+    private byte XAxisCanSpeedUp;
 
     private float speed;
     public int speedGround;
@@ -48,6 +51,15 @@ public class PlayerController : MonoBehaviour
 
     public float rateOfFire;
     private float rateOfFireRemainig;
+    public int ammoMax;
+    private int ammoRemaining;
+    public float reloadTimeMax = 0.8F;
+    private float reloadTimeRemainig;
+    private bool reloading = false;
+    public TextMeshProUGUI ammoText;
+
+    public short health;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -55,12 +67,17 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
 
+        reloadTimeRemainig = reloadTimeMax;
+        ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();
+
+
         //Application.targetFrameRate = 144;
     }
 
     // Update is called once per frame
     void Update()
     {
+        #region Movement
         ZAxisInput = Input.GetAxisRaw("Z Axis");
         XAxisInput = Input.GetAxisRaw("X Axis");
 
@@ -74,11 +91,11 @@ public class PlayerController : MonoBehaviour
             trCamera.eulerAngles += new Vector3(YMouseInput * YMouseSens,0f, 0f);
         }
 
-
+        
         ZAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).z;
         XAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).x;
-        
 
+        #region MaxSpeed
         if (isGrounded == true && Input.GetAxisRaw("run") > 0)
         {
             maxSpeed = maxSpeedRun;
@@ -94,8 +111,7 @@ public class PlayerController : MonoBehaviour
             maxSpeed = maxSpeedAir;
             speed = speedAir;
         }
-
-
+        
         if (XAxisInput != 0 && ZAxisInput != 0)
         {
             maxSpeedCombined = maxSpeed * 1.5f;
@@ -107,9 +123,9 @@ public class PlayerController : MonoBehaviour
         {
             maxSpeedCombined = maxSpeed*1.25f;
         }
+        #endregion
 
-        
-
+        #region CanSeedUp
         if (((ZAxisInput > 0 && ZAxisVelocity > maxSpeed) || (ZAxisInput < 0 && ZAxisVelocity < maxSpeed * -1)) || (isGrounded && Mathf.Abs(ZAxisVelocity) + Mathf.Abs(XAxisVelocity) > maxSpeedCombined))
         {
             ZAxisCanSpeedUp = 0;
@@ -127,12 +143,12 @@ public class PlayerController : MonoBehaviour
         {
             XAxisCanSpeedUp = 1;
         }
-
+        #endregion
 
         isGrounded = groundTrigger.isGrounded;
 
-
-        if(Input.GetKeyDown(KeyCode.Space))
+        #region Jumping
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             spaceBufferRemaining = spaceBufffer;
         }
@@ -161,23 +177,45 @@ public class PlayerController : MonoBehaviour
             rbPlayer.AddRelativeForce(new Vector3(0f, 300f, 0f));
             jump = false;
         }
+        #endregion
+        #endregion
 
+        #region Shooting
+        if (Input.GetKeyDown("r"))
+        {
+            reloading = true;
+        }
+        if (reloading == true)
+        {
+            reloadTimeRemainig -= Time.deltaTime;
+        }
+        if (reloadTimeRemainig <= 0)
+        {
+            ammoRemaining = ammoMax;
+            ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();
+            reloading = false;
+            reloadTimeRemainig = reloadTimeMax;
+        }
 
         if (rateOfFire > 0)
         {
             rateOfFireRemainig -= Time.deltaTime;
         }
-        if (Input.GetMouseButton(0) && rateOfFireRemainig <= 0)
+        if (Input.GetMouseButton(0) && rateOfFireRemainig <= 0 && ammoRemaining > 0 && reloading == false)
         {
+            ammoRemaining--;
+            ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();
             rateOfFireRemainig = rateOfFire;
             Instantiate(projectile, trBulletSpawn.position, trBulletSpawn.rotation);
         }
-
-
+        #endregion
     }
 
     private void FixedUpdate()
     {
-        rbPlayer.AddRelativeForce(new Vector3(XAxisInput * speed * XAxisCanSpeedUp, 0F, ZAxisInput * speed * ZAxisCanSpeedUp));
+        if (XAxisInput != 0 || ZAxisInput != 0)
+        {
+            rbPlayer.AddRelativeForce(new Vector3(XAxisInput * speed * XAxisCanSpeedUp, 0F, ZAxisInput * speed * ZAxisCanSpeedUp));
+        }
     }
 }

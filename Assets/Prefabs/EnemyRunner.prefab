@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7012250954659162889}
   - component: {fileID: 7012250954659162888}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyRunner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,11 +160,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {fileID: 0}
-  speed: 2
+  speed: 5.5
   nextWaypointDistance: 3
   reachedEndOfPath: 0
   searchPathDelayMax: 0
   agroDistance: 10
+  cl: {fileID: 0}
+  health: 20
 --- !u!114 &7012250954659162889
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@ using UnityEngine;
 // Note this line, if it is left out, the script won't know that the class 'Path' exists and it will throw compiler errors
 // This line should always be present at the top of scripts which use pathfinding
 using Pathfinding;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 
 [HelpURL("http://arongranberg.com/astar/docs/class_partial1_1_1_astar_a_i.php")]
 public class EnemyAI : MonoBehaviour
@@ -26,6 +28,9 @@ public class EnemyAI : MonoBehaviour
 
     public float agroDistance;
 
+
+    public Collider cl;
+    public short health = 20;
     public void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -40,7 +45,7 @@ public class EnemyAI : MonoBehaviour
 
     public void OnPathComplete(Path p)
     {
-        Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
+        //Debug.Log("A path was calculated. Did it fail with an error? " + p.error);
 
         if (!p.error)
         {
@@ -52,7 +57,10 @@ public class EnemyAI : MonoBehaviour
 
     public void Update()
     {
-        
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
 
 
         searchPathDelay += Time.deltaTime;
@@ -117,5 +125,14 @@ public class EnemyAI : MonoBehaviour
 
         // If you are writing a 2D game you should remove the CharacterController code above and instead move the transform directly by uncommenting the next line
         // transform.position += velocity * Time.deltaTime;
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            health -= collision.gameObject.GetComponent<Projectile>().Damage;
+            Destroy(collision.gameObject);
+        }  
     }
 }

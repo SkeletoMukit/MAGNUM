@@ -133,6 +133,6 @@ public class EnemyAI : MonoBehaviour
         {
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
             Destroy(collision.gameObject);
-        }  
+        }
     }
 }

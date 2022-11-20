@@ -58,7 +58,8 @@ public class PlayerController : MonoBehaviour
     private bool reloading = false;
     public TextMeshProUGUI ammoText;
 
-    public short health;
+    public short health = 100;
+    public TextMeshProUGUI healthText;
     #endregion
 
     // Start is called before the first frame update
@@ -77,6 +78,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+
         #region Movement
         ZAxisInput = Input.GetAxisRaw("Z Axis");
         XAxisInput = Input.GetAxisRaw("X Axis");

@@ -78,30 +78,36 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Check for health
         if (health <= 0)
         {
             gameObject.SetActive(false);
         }
 
         #region Movement
+        //get movement input
         ZAxisInput = Input.GetAxisRaw("Z Axis");
         XAxisInput = Input.GetAxisRaw("X Axis");
 
         XMouseInput = Input.GetAxisRaw("Mouse X");
         YMouseInput = Input.GetAxisRaw("Mouse Y");
-
+        
+        //horiontal camera
         trPlayer.eulerAngles += new Vector3(0f, XMouseInput * XMouseSens, 0f);
-
+        
+        //verical camera
+        //Camera limitataions
         if ((YMouseInput < 0f && (trCamera.eulerAngles.x > 280 || trCamera.eulerAngles.x < 90)) || (YMouseInput > 0f && (trCamera.eulerAngles.x < 80 || trCamera.eulerAngles.x > 270)))
         {
             trCamera.eulerAngles += new Vector3(YMouseInput * YMouseSens,0f, 0f);
         }
 
-        
+        //get player velocity
         ZAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).z;
         XAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).x;
 
         #region MaxSpeed
+        //determine max speed player can reach
         if (isGrounded == true && Input.GetAxisRaw("run") > 0)
         {
             maxSpeed = maxSpeedRun;
@@ -118,12 +124,12 @@ public class PlayerController : MonoBehaviour
             speed = speedAir;
         }
         
+        //check if player is moveing in 2 directions
         if (XAxisInput != 0 && ZAxisInput != 0)
         {
             maxSpeedCombined = maxSpeed * 1.5f;
             maxSpeed *= 0.75F;
             speed *= 0.75F;
-            
         }
         else
         {
@@ -132,6 +138,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region CanSeedUp
+        //player can speed up if he didnt reach max velocity
         if (((ZAxisInput > 0 && ZAxisVelocity > maxSpeed) || (ZAxisInput < 0 && ZAxisVelocity < maxSpeed * -1)) || (isGrounded && Mathf.Abs(ZAxisVelocity) + Mathf.Abs(XAxisVelocity) > maxSpeedCombined))
         {
             ZAxisCanSpeedUp = 0;
@@ -150,10 +157,12 @@ public class PlayerController : MonoBehaviour
             XAxisCanSpeedUp = 1;
         }
         #endregion
-
+        
+        //check if player is touching ground
         isGrounded = groundTrigger.isGrounded;
 
         #region Jumping
+        //get jump input with buffer
         if (Input.GetKeyDown(KeyCode.Space))
         {
             spaceBufferRemaining = spaceBufffer;
@@ -162,13 +171,15 @@ public class PlayerController : MonoBehaviour
         {
             spaceBufferRemaining -= Time.deltaTime;
         }
-
+        
+        //check if player can jump
         if (isGrounded == true && spaceBufferRemaining > 0 && jumpCoolDownRemainig <= 0)
         {
             spaceBufferRemaining = 0;
             jump = true;
         }
-
+        
+        //cooldown on jumping
         if (jump == true)
         {
             jumpCoolDownRemainig = jumpCoolDown;
@@ -177,7 +188,8 @@ public class PlayerController : MonoBehaviour
         {
             jumpCoolDownRemainig -= Time.deltaTime;
         }
-
+        
+        //adding force to player, ending jump
         if (jump == true)
         {
             rbPlayer.AddRelativeForce(new Vector3(0f, 300f, 0f));

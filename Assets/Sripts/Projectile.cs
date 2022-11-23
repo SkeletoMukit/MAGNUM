@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
 
     public short Damage = 3;
 
+    public byte bounces = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +33,15 @@ public class Projectile : MonoBehaviour
         if (timeCount > 0.1F && rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0)
         {
             rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            Damage = 0;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        bounces++;
+        if (bounces > 3)
+        {
             Damage = 0;
         }
     }

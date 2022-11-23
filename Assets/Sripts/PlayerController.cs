@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     private bool reloading = false;
     public TextMeshProUGUI ammoText;
 
+    public AudioSource shotAudio;
+
     public short health = 100;
     public TextMeshProUGUI healthText;
     #endregion
@@ -225,6 +227,7 @@ public class PlayerController : MonoBehaviour
             ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();
             rateOfFireRemainig = rateOfFire;
             Instantiate(projectile, trBulletSpawn.position, trBulletSpawn.rotation);
+            shotAudio.Play(0);
         }
         #endregion
     }

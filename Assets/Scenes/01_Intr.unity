@@ -237,35 +237,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 41.16
       objectReference: {fileID: 0}
-    - target: {fileID: 8033983774386030293, guid: 826081a802346c94ea569f04eb1c2a4e,
+    - target: {fileID: 8033983774379129391, guid: 826081a802346c94ea569f04eb1c2a4e,
         type: 3}
-      propertyPath: m_TargetDisplay
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033983774386030293, guid: 826081a802346c94ea569f04eb1c2a4e,
-        type: 3}
-      propertyPath: m_projectionMatrixMode
+      propertyPath: m_Enabled
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033983774386030293, guid: 826081a802346c94ea569f04eb1c2a4e,
-        type: 3}
-      propertyPath: m_AllowDynamicResolution
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8033983774386030295, guid: 826081a802346c94ea569f04eb1c2a4e,
         type: 3}
       propertyPath: m_CameraType
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033983774386030295, guid: 826081a802346c94ea569f04eb1c2a4e,
-        type: 3}
-      propertyPath: m_AllowXRRendering
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8033983774386030295, guid: 826081a802346c94ea569f04eb1c2a4e,
-        type: 3}
-      propertyPath: m_RenderPostProcessing
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8033983774896073625, guid: 826081a802346c94ea569f04eb1c2a4e,
         type: 3}
@@ -1729,13 +1709,8 @@ PrefabInstance:
       objectReference: {fileID: 43852495}
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
-        type: 3}
-      propertyPath: agroDistance
-      value: 30
+      propertyPath: health
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
@@ -2518,6 +2493,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 903625294889733871, guid: 20cb2585eeff44e4b80312dd0f2df44a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373170561069652135, guid: 20cb2585eeff44e4b80312dd0f2df44a,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3536547490049585239, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2532,6 +2517,11 @@ PrefabInstance:
         type: 3}
       propertyPath: speed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
+        type: 3}
+      propertyPath: health
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
@@ -2556,7 +2546,7 @@ PrefabInstance:
     - target: {fileID: 7012250954659162900, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 73.909
+      value: 74.69
       objectReference: {fileID: 0}
     - target: {fileID: 7012250954659162900, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}

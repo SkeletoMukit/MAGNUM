@@ -210,7 +210,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7012250954659162909}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 8232881040ceacd439c751febb25d0e2, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -278,9 +278,11 @@ MonoBehaviour:
   nextWaypointDistance: 3
   reachedEndOfPath: 0
   searchPathDelayMax: 0
-  agroDistance: 15
+  agroDistance: 30
   cl: {fileID: 0}
-  health: 20
+  health: 10000
+  bloodParticle: {fileID: 4272675278314998038, guid: 892e06c631a8de54ba981d57a99493d2,
+    type: 3}
 --- !u!114 &7012250954659162889
 MonoBehaviour:
   m_ObjectHideFlags: 0

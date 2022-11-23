@@ -31,6 +31,9 @@ public class EnemyAI : MonoBehaviour
 
     public Collider cl;
     public short health = 20;
+
+    public GameObject bloodParticle;
+
     public void Start()
     {
         seeker = GetComponent<Seeker>();
@@ -132,6 +135,7 @@ public class EnemyAI : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
+            Instantiate(bloodParticle, transform.localPosition, transform.localRotation);
             Destroy(collision.gameObject);
         }
     }

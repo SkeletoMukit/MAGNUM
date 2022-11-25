@@ -1068,7 +1068,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &201049224
 Transform:
   m_ObjectHideFlags: 0
@@ -1390,7 +1390,7 @@ PrefabInstance:
     - target: {fileID: 7012250954659162909, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7442205318825379676, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
@@ -1963,7 +1963,7 @@ PrefabInstance:
     - target: {fileID: 7012250954659162909, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7442205318825379676, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
@@ -3744,7 +3744,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1848563384}
   - component: {fileID: 1848563383}
-  - component: {fileID: 1848563382}
+  - component: {fileID: 1848563385}
   m_Layer: 0
   m_Name: Enemies Group 01 Trigger
   m_TagString: Untagged
@@ -3752,19 +3752,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1848563382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848563381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b222a028719771439cd696f59fdae82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parentObject: {fileID: 201049223}
 --- !u!65 &1848563383
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3793,6 +3780,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1848563385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848563381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e7d8b01a962c44bbcbe22e7091ea14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToActivate: {fileID: 201049223}
 --- !u!1 &1918780349
 GameObject:
   m_ObjectHideFlags: 0

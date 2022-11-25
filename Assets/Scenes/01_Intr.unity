@@ -1715,7 +1715,7 @@ PrefabInstance:
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
       propertyPath: health
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
@@ -2526,7 +2526,7 @@ PrefabInstance:
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
       propertyPath: health
-      value: 150
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7012250954659162891, guid: 20cb2585eeff44e4b80312dd0f2df44a,
         type: 3}
@@ -2630,6 +2630,65 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20cb2585eeff44e4b80312dd0f2df44a, type: 3}
+--- !u!1 &1243895139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1243895142}
+  - component: {fileID: 1243895141}
+  - component: {fileID: 1243895140}
+  m_Layer: 0
+  m_Name: Scene Changer Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1243895140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243895139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f23bca78b3dc71748bc96fec83707e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToChangeInto: TestScene01
+--- !u!65 &1243895141
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243895139}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1243895142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243895139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.06, y: 11.048, z: -12.306}
+  m_LocalScale: {x: 3.1213, y: 3.1213, z: 3.1213}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1245897878
 GameObject:
   m_ObjectHideFlags: 0
@@ -4325,7 +4384,7 @@ MonoBehaviour:
   manualDebugFloorRoof: 0
   showSearchTree: 0
   unwalkableNodeDebugSize: 0.3
-  logPathResults: 1
+  logPathResults: 4
   maxNearestNodeDistance: 100
   scanOnStartup: 1
   fullGetNearestSearch: 0

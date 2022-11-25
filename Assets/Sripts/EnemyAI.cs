@@ -33,9 +33,12 @@ public class EnemyAI : MonoBehaviour
     public short health = 20;
 
     public GameObject bloodParticle;
+    public GameObject bloodParticleDeath;
 
     public void Start()
     {
+        speed = speed * Random.Range(0.8F,1.2F);
+
         seeker = GetComponent<Seeker>();
         // If you are writing a 2D game you should remove this line
         // and use the alternative way to move sugggested further below.
@@ -62,7 +65,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
+            Instantiate(bloodParticleDeath, transform.localPosition, transform.localRotation);
+            Destroy(this.gameObject);
         }
 
 
@@ -123,8 +127,11 @@ public class EnemyAI : MonoBehaviour
 
         // Move the agent using the CharacterController component
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
-        controller.SimpleMove(velocity);
-        transform.LookAt(targetPosition);
+        if (health > 0)
+        {
+            controller.SimpleMove(velocity);
+            transform.LookAt(targetPosition);
+        }
 
         // If you are writing a 2D game you should remove the CharacterController code above and instead move the transform directly by uncommenting the next line
         // transform.position += velocity * Time.deltaTime;

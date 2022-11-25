@@ -27,13 +27,13 @@ public class HurtBoxEnemyDamge : MonoBehaviour
         if (bitting == true)
         {
             cooldownRemaining -= Time.deltaTime;
-            enemyAiScript.move = false;
+            enemyAiScript.speed = 0F;
         }
         if (cooldownRemaining <= 0F)
         {
             bitting = false;
             cooldownRemaining = cooldown;
-            enemyAiScript.move = true;
+            enemyAiScript.speed = enemyAiScript.speedDefault;
         }
     }
 

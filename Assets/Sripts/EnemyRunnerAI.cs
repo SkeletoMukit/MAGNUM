@@ -15,7 +15,8 @@ public class EnemyRunnerAI : MonoBehaviour
 
     public Path path;
 
-    public float speed = 2;
+    public float speedDefault = 6;
+    public float speed = 6;
 
     public float nextWaypointDistance = 3;
 
@@ -36,11 +37,10 @@ public class EnemyRunnerAI : MonoBehaviour
     public GameObject bloodParticle;
     public GameObject bloodParticleDeath;
 
-    public bool move = true;
-
     public void Start()
     {
-        speed = speed * Random.Range(0.8F,1.2F);
+        speedDefault = speedDefault * Random.Range(0.8F, 1.2F);
+        speed = speedDefault;
 
         seeker = GetComponent<Seeker>();
         // If you are writing a 2D game you should remove this line
@@ -126,14 +126,7 @@ public class EnemyRunnerAI : MonoBehaviour
         // Normalize it so that it has a length of 1 world unit
         Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
         // Multiply the direction by our desired enemyAiScript to get a velocity
-        if (move == true)
-        {
-            velocity = dir * speed * speedFactor;
-        }
-        else
-        {
-            velocity = dir * 0F * speedFactor;
-        }
+        velocity = dir * speed * speedFactor;
 
 
         // Move the agent using the CharacterController component
@@ -150,7 +143,10 @@ public class EnemyRunnerAI : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
-            Instantiate(bloodParticle, transform.position, transform.rotation);
+            if (collision.gameObject.GetComponent<Projectile>().Damage != 0)
+            {
+                Instantiate(bloodParticle, transform.position, transform.rotation);
+            }
             Destroy(collision.gameObject);
         }
     }

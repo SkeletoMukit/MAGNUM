@@ -59,6 +59,8 @@ public class PlayerController : MonoBehaviour
     private bool reloading = false;
     public TextMeshProUGUI ammoText;
 
+    public GameObject bloodParticle;
+
     public AudioSource shotAudio;
 
     public static short health = 100;
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
         reloadTimeRemainig = reloadTimeMax;
         ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();
 
-        healthText.text = PlayerController.health.ToString();
+        healthText.text = PlayerController.health.ToString() + " HP";
         //Application.targetFrameRate = 144;
     }
 
@@ -244,9 +246,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage);
+            Destroy(collision.gameObject);
+        }
+    }
+
     public void TakeDamage(short damage)
     {
         health -= damage;
-        healthText.text = PlayerController.health.ToString();
+        if (damage != 0)
+        {
+            Instantiate(bloodParticle, transform.position, transform.rotation);
+        }
+        healthText.text = PlayerController.health.ToString() + " HP";
     }
 }

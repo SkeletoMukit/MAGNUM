@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 7012250954659162888}
   m_Layer: 0
   m_Name: EnemyRunner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {fileID: 0}
+  speedDefault: 6
   speed: 6
   nextWaypointDistance: 3
   reachedEndOfPath: 0
@@ -182,7 +183,6 @@ MonoBehaviour:
     type: 3}
   bloodParticleDeath: {fileID: 4272675278314998038, guid: 3798763b699c4c74bb562c5f018e8a7a,
     type: 3}
-  move: 1
 --- !u!114 &7012250954659162889
 MonoBehaviour:
   m_ObjectHideFlags: 0

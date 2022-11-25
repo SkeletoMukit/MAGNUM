@@ -133,6 +133,8 @@ MonoBehaviour:
   timeAlive: 10
   Damage: 3
   bounces: 0
+  bulletHole: {fileID: 6181809691869131107, guid: 2c31f2400ba9cab4aa167d24fd4b9f03,
+    type: 3}
 --- !u!96 &4597788283836258887
 TrailRenderer:
   serializedVersion: 2

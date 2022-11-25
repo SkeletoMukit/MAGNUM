@@ -7,8 +7,11 @@ public class TriggerActivateObject : MonoBehaviour
     public GameObject objectToActivate;
 
     private void OnTriggerEnter(Collider other)
-    {
-        objectToActivate.SetActive(true);
-        Destroy(this.gameObject);
+    {   
+        if (other.gameObject.tag == "Player") 
+        {
+            objectToActivate.SetActive(true);
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -911,6 +911,8 @@ MonoBehaviour:
   ammoMax: 30
   reloadTimeMax: 0.8
   ammoText: {fileID: 1333715194474887024}
+  bloodParticle: {fileID: 4272675278314998038, guid: 892e06c631a8de54ba981d57a99493d2,
+    type: 3}
   shotAudio: {fileID: 2481420157304240724}
   healthText: {fileID: 529494578249675689}
 --- !u!1 &8033983774386030299

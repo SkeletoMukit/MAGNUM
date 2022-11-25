@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
 
     public byte bounces = 0;
 
+    public GameObject bulletHole;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +42,14 @@ public class Projectile : MonoBehaviour
     {
         bounces++;
         if (bounces > 3)
-        {
+        {   
+            
             Damage = 0;
+        }
+        if (bounces < 4 && collision.gameObject.tag == "LevelSolidObjects")
+        {
+            ContactPoint contact = collision.GetContact(0);
+            Instantiate(bulletHole, transform.position, transform.rotation).transform.LookAt(contact.point);
         }
     }
 }

@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 0.66345656}
+  m_Center: {x: 0, y: 0, z: 0.16827105}
 --- !u!114 &5899313044380808952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +59,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 3
-  healthText: {fileID: 0}
+  takeDamage: {fileID: 0}
+  cooldown: 0.5
+  enemyAiScript: {fileID: 7012250954659162891}
 --- !u!1 &7012250954659162909
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {fileID: 0}
-  speed: 5
+  speed: 6
   nextWaypointDistance: 3
   reachedEndOfPath: 0
   searchPathDelayMax: 0
@@ -180,6 +182,7 @@ MonoBehaviour:
     type: 3}
   bloodParticleDeath: {fileID: 4272675278314998038, guid: 3798763b699c4c74bb562c5f018e8a7a,
     type: 3}
+  move: 1
 --- !u!114 &7012250954659162889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,7 +217,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 0.15
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08

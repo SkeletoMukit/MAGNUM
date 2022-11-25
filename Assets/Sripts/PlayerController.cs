@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     public float rateOfFire;
     private float rateOfFireRemainig;
     public int ammoMax;
-    private int ammoRemaining;
+    private static int ammoRemaining;
     public float reloadTimeMax = 0.8F;
     private float reloadTimeRemainig;
     private bool reloading = false;
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
     public AudioSource shotAudio;
 
-    public short health = 100;
+    public static short health = 100;
     public TextMeshProUGUI healthText;
     #endregion
 
@@ -71,10 +71,11 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
 
+        ammoRemaining = ammoMax;
         reloadTimeRemainig = reloadTimeMax;
         ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();
 
-
+        healthText.text = PlayerController.health.ToString();
         //Application.targetFrameRate = 144;
     }
 
@@ -84,6 +85,8 @@ public class PlayerController : MonoBehaviour
         //Check for health
         if (health <= 0)
         {
+            health = 100;
+            ammoRemaining = ammoMax;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
@@ -110,7 +113,7 @@ public class PlayerController : MonoBehaviour
         XAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).x;
 
         #region MaxSpeed
-        //determine max speed player can reach
+        //determine max enemyAiScript player can reach
         if (isGrounded == true && Input.GetAxisRaw("run") > 0)
         {
             maxSpeed = maxSpeedRun;
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region CanSeedUp
-        //player can speed up if he didnt reach max velocity
+        //player can enemyAiScript up if he didnt reach max velocity
         if (((ZAxisInput > 0 && ZAxisVelocity > maxSpeed) || (ZAxisInput < 0 && ZAxisVelocity < maxSpeed * -1)) || (isGrounded && Mathf.Abs(ZAxisVelocity) + Mathf.Abs(XAxisVelocity) > maxSpeedCombined))
         {
             ZAxisCanSpeedUp = 0;
@@ -202,7 +205,7 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region Shooting
-        if (Input.GetKeyDown("r"))
+        if (Input.GetKeyDown("r") && reloading == false)
         {
             reloading = true;
         }
@@ -239,5 +242,11 @@ public class PlayerController : MonoBehaviour
         {
             rbPlayer.AddRelativeForce(new Vector3(XAxisInput * speed * XAxisCanSpeedUp, 0F, ZAxisInput * speed * ZAxisCanSpeedUp));
         }
+    }
+
+    public void TakeDamage(short damage)
+    {
+        health -= damage;
+        healthText.text = PlayerController.health.ToString();
     }
 }

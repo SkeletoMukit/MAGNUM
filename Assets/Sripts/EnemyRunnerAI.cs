@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 
 [HelpURL("http://arongranberg.com/astar/docs/class_partial1_1_1_astar_a_i.php")]
-public class EnemyAI : MonoBehaviour
+public class EnemyRunnerAI : MonoBehaviour
 {
     public Transform targetPosition;
 
@@ -28,12 +28,15 @@ public class EnemyAI : MonoBehaviour
 
     public float agroDistance;
 
+    Vector3 velocity;
 
     public Collider cl;
     public short health = 20;
 
     public GameObject bloodParticle;
     public GameObject bloodParticleDeath;
+
+    public bool move = true;
 
     public void Start()
     {
@@ -65,7 +68,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (health <= 0)
         {
-            Instantiate(bloodParticleDeath, transform.localPosition, transform.localRotation);
+            Instantiate(bloodParticleDeath, transform.position, transform.rotation);
             Destroy(this.gameObject);
         }
 
@@ -122,16 +125,21 @@ public class EnemyAI : MonoBehaviour
         // Direction to the next waypoint
         // Normalize it so that it has a length of 1 world unit
         Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
-        // Multiply the direction by our desired speed to get a velocity
-        Vector3 velocity = dir * speed * speedFactor;
+        // Multiply the direction by our desired enemyAiScript to get a velocity
+        if (move == true)
+        {
+            velocity = dir * speed * speedFactor;
+        }
+        else
+        {
+            velocity = dir * 0F * speedFactor;
+        }
+
 
         // Move the agent using the CharacterController component
         // Note that SimpleMove takes a velocity in meters/second, so we should not multiply by Time.deltaTime
-        if (health > 0)
-        {
-            controller.SimpleMove(velocity);
-            transform.LookAt(targetPosition);
-        }
+        controller.SimpleMove(velocity);
+        transform.LookAt(targetPosition);
 
         // If you are writing a 2D game you should remove the CharacterController code above and instead move the transform directly by uncommenting the next line
         // transform.position += velocity * Time.deltaTime;
@@ -142,7 +150,7 @@ public class EnemyAI : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
-            Instantiate(bloodParticle, transform.localPosition, transform.localRotation);
+            Instantiate(bloodParticle, transform.position, transform.rotation);
             Destroy(collision.gameObject);
         }
     }

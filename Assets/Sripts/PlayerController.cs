@@ -251,17 +251,17 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             TakeDamage(collision.gameObject.GetComponent<Projectile>().Damage);
-            Destroy(collision.gameObject);
+            Destroy(collision.gameObject);     
         }
     }
 
     public void TakeDamage(short damage)
     {
-        health -= damage;
         if (damage != 0)
         {
+            health -= damage;
             Instantiate(bloodParticle, transform.position, transform.rotation);
-        }
-        healthText.text = PlayerController.health.ToString() + " HP";
+            healthText.text = PlayerController.health.ToString() + " HP";
+        } 
     }
 }

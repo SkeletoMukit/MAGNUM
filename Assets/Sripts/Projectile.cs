@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public Rigidbody rb;
+    public MeshRenderer mr;
     public float power = 50F;
 
     public float timeAlive = 10F;
@@ -29,6 +30,10 @@ public class Projectile : MonoBehaviour
         if(timeCount > timeAlive)
         {
             Destroy(this.gameObject);
+        }
+        if (timeCount > 0.02F)
+        {
+            mr.enabled=true;
         }
 
         if (timeCount > 0.1F && rb.velocity.x == 0 && rb.velocity.y == 0 && rb.velocity.z == 0)

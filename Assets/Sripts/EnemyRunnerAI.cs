@@ -37,6 +37,8 @@ public class EnemyRunnerAI : MonoBehaviour
     public GameObject bloodParticle;
     public GameObject bloodParticleDeath;
 
+    public GameObject sprite;
+
     public void Start()
     {
         speedDefault = speedDefault * Random.Range(0.8F, 1.2F);
@@ -68,7 +70,7 @@ public class EnemyRunnerAI : MonoBehaviour
     {
         if (health <= 0)
         {
-            Instantiate(bloodParticleDeath, transform.position, transform.rotation);
+            Instantiate(bloodParticleDeath, sprite.transform.position, transform.rotation);
             Destroy(this.gameObject);
         }
 
@@ -145,7 +147,7 @@ public class EnemyRunnerAI : MonoBehaviour
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
             if (collision.gameObject.GetComponent<Projectile>().Damage != 0)
             {
-                Instantiate(bloodParticle, transform.position, transform.rotation);
+                Instantiate(bloodParticle, sprite.transform.position, transform.rotation);
             }
             Destroy(collision.gameObject);
         }

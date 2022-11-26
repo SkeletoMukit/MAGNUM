@@ -110,10 +110,10 @@ BoxCollider:
   m_GameObject: {fileID: 7012250954659162909}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.7214228, y: 1.9999998, z: 0.109043635}
-  m_Center: {x: -0.038491767, y: 0, z: 0.57}
+  m_Center: {x: -0.038491767, y: 0, z: 0.23}
 --- !u!54 &7012250954659162896
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
     type: 3}
   bloodParticleDeath: {fileID: 4272675278314998038, guid: 3798763b699c4c74bb562c5f018e8a7a,
     type: 3}
+  sprite: {fileID: 7442205318825379676}
 --- !u!114 &7012250954659162889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,7 +250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7442205318825379676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.029, z: 0.47}
+  m_LocalPosition: {x: 0, y: -0.029, z: 0.359}
   m_LocalScale: {x: 0.64, y: 0.64, z: 0.64}
   m_ConstrainProportionsScale: 1
   m_Children: []

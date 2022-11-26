@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.66345656}
-  m_Center: {x: 0, y: 0, z: 0.16827105}
+  m_Size: {x: 1, y: 1, z: 1.0467721}
+  m_Center: {x: 0, y: 0, z: 0.35992885}
 --- !u!114 &5899313044380808952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,10 +110,10 @@ BoxCollider:
   m_GameObject: {fileID: 7012250954659162909}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.7214228, y: 1.9999998, z: 0.109043635}
-  m_Center: {x: -0.038491767, y: 0, z: 0.014105788}
+  m_Center: {x: -0.038491767, y: 0, z: 0.57}
 --- !u!54 &7012250954659162896
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -217,10 +217,10 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
-  m_Radius: 0.15
+  m_Radius: 0.56
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.2
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7442205318825379676
@@ -249,7 +249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7442205318825379676}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.029, z: 0}
+  m_LocalPosition: {x: 0, y: -0.029, z: 0.47}
   m_LocalScale: {x: 0.64, y: 0.64, z: 0.64}
   m_ConstrainProportionsScale: 1
   m_Children: []

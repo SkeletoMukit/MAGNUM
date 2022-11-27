@@ -34,10 +34,10 @@ public class PlayerController : MonoBehaviour
     private float maxSpeedCombined;
 
     private float XMouseInput;
-    public float XMouseSens;
+    public static float XMouseSens = 1F;
 
     private float YMouseInput;
-    public float YMouseSens;
+    public static float YMouseSens = 1F;
 
     public GroundTrigger groundTrigger;
     private bool isGrounded;

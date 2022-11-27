@@ -102,13 +102,17 @@ public class PlayerController : MonoBehaviour
         
         //horiontal camera
         trPlayer.eulerAngles += new Vector3(0f, XMouseInput * XMouseSens, 0f);
-        
+
         //verical camera
         //Camera limitataions
-        if ((YMouseInput < 0f && (trCamera.eulerAngles.x > 280 || trCamera.eulerAngles.x < 90)) || (YMouseInput > 0f && (trCamera.eulerAngles.x < 80 || trCamera.eulerAngles.x > 270)))
+        if (YMouseInput > 0f ^ YMouseInput < 0f)
         {
-            trCamera.eulerAngles += new Vector3(YMouseInput * YMouseSens,0f, 0f);
+            if (Mathf.Abs((Mathf.Repeat(trCamera.eulerAngles.x + 180, 360) - 180) + YMouseInput * YMouseSens) <= 90)
+            {
+                trCamera.eulerAngles += new Vector3(YMouseInput * YMouseSens, 0f, 0f);
+            }
         }
+
 
         //get player velocity
         ZAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).z;

@@ -48,7 +48,6 @@ public class Projectile : MonoBehaviour
         bounces++;
         if (bounces > 3)
         {   
-            
             Damage = 0;
         }
         if (bounces < 4 && collision.gameObject.tag == "LevelSolidObjects")

@@ -105,12 +105,9 @@ public class PlayerController : MonoBehaviour
 
         //verical camera
         //Camera limitataions
-        if (YMouseInput > 0f ^ YMouseInput < 0f)
+        if ((YMouseInput > 0f ^ YMouseInput < 0f) && Mathf.Abs((Mathf.Repeat(trCamera.eulerAngles.x + 180, 360) - 180) + YMouseInput * YMouseSens) <= 90)
         {
-            if (Mathf.Abs((Mathf.Repeat(trCamera.eulerAngles.x + 180, 360) - 180) + YMouseInput * YMouseSens) <= 90)
-            {
-                trCamera.eulerAngles += new Vector3(YMouseInput * YMouseSens, 0f, 0f);
-            }
+            trCamera.eulerAngles += new Vector3(YMouseInput * YMouseSens, 0f, 0f);
         }
 
 

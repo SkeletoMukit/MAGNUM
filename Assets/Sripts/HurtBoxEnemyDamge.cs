@@ -18,7 +18,6 @@ public class HurtBoxEnemyDamge : MonoBehaviour
     void Start()
     {
         cooldownRemaining = cooldown;
-        damage = (short)(damage *  Random.Range(0.8F, 1.2F));
     }
 
     // Update is called once per frame
@@ -43,7 +42,7 @@ public class HurtBoxEnemyDamge : MonoBehaviour
         {   if (bitting == false)
             {
                 bitting = true;
-                takeDamage.TakeDamage(damage);
+                takeDamage.TakeDamage((short)(damage * Random.Range(0.8F, 1.2F)));
             }
         }
     }

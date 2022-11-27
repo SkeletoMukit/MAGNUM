@@ -131,7 +131,7 @@ MonoBehaviour:
   mr: {fileID: 1380214754545182610}
   power: 50
   timeAlive: 10
-  Damage: 3
+  Damage: 6
   bounces: 0
   bulletHole: {fileID: 6181809691869131107, guid: 2c31f2400ba9cab4aa167d24fd4b9f03,
     type: 3}

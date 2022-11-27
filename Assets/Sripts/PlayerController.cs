@@ -33,11 +33,13 @@ public class PlayerController : MonoBehaviour
     private float maxSpeed;
     private float maxSpeedCombined;
 
+    public static float mouseSens = 1F;
+
     private float XMouseInput;
-    public static float XMouseSens = 1F;
+    public float XMouseSens = 1F;
 
     private float YMouseInput;
-    public static float YMouseSens = 1F;
+    public float YMouseSens = 1F;
 
     public GroundTrigger groundTrigger;
     private bool isGrounded;
@@ -65,7 +67,16 @@ public class PlayerController : MonoBehaviour
 
     public static short health = 100;
     public TextMeshProUGUI healthText;
+
+    public GameObject Level;
+    public GameObject PauseMenu;
     #endregion
+
+    private void OnEnable()
+    {
+        YMouseSens = mouseSens;
+        XMouseSens = mouseSens;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +95,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseMenu.SetActive(true);
+            Cursor.visible = true;
+            Level.SetActive(false);
+        }
+
         //Check for health
         if (health <= 0)
         {

@@ -71,6 +71,7 @@ public class EnemyRunnerAI : MonoBehaviour
         if (health <= 0)
         {
             Instantiate(bloodParticleDeath, sprite.transform.position, transform.rotation);
+            ScreenCapture.CaptureScreenshot("Assets/pauseMenuScreenShoot.png");
             Destroy(this.gameObject);
         }
 

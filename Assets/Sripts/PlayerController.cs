@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
     public float rateOfFire;
     private float rateOfFireRemainig;
     public int ammoMax;
-    private static int ammoRemaining;
+    public static int ammoRemaining;
     public float reloadTimeMax = 0.8F;
     private float reloadTimeRemainig;
     private bool reloading = false;
@@ -74,16 +74,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         YMouseSens = mouseSens;
         XMouseSens = mouseSens;
+
+        ammoRemaining = ammoMax;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
-
         ammoRemaining = ammoMax;
         reloadTimeRemainig = reloadTimeMax;
         ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();

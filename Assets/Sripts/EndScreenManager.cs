@@ -16,13 +16,17 @@ public class EndScreenManager : MonoBehaviour
     public TextMeshProUGUI textTimePlayed;
 
     // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
         buttonReset.onClick.AddListener(TaskOnClick01);
         buttonEnd.onClick.AddListener(TaskOnClick02);
 
         textTimePlayed.text = "Time played:\n" + TimePlayed.timePlayed.ToString() + " sec";
         TimePlayed.timePlayed = 0F;
+        PlayerController.health = 100;
     }
 
     void TaskOnClick01()

@@ -15,12 +15,12 @@ public class PauseMenuManager : MonoBehaviour
     public GameObject Level;
     public GameObject PauseMenu;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnEnable()
     {
-        slider.value = PlayerPrefs.GetFloat("Sens");
-        if (slider.value == 0) { slider.value = 0.5F; }
-        PlayerController.mouseSens = slider.value * 10F;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        slider.value = PlayerPrefs.GetFloat("Sens")/10F;
 
         buttonResume.onClick.AddListener(TaskOnClick01);
         buttonEnd.onClick.AddListener(TaskOnClick02);

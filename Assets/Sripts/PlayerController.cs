@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         //Check for health
         if (health <= 0)
         {
+            TimePlayed.timePlayed = 0F;
             health = 100;
             ammoRemaining = ammoMax;
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);

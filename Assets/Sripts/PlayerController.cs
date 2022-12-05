@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
     public int speedAir;
     public int speedRun;
 
+    public Vector3 velocity;
+    public float drag;
+
     public float maxSpeedGround;
     public float maxSpeedAir;
     public float maxSpeedRun;
@@ -70,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject Level;
     public GameObject PauseMenu;
+
+    public TextMeshProUGUI time;
     #endregion
 
     private void OnEnable()
@@ -80,7 +85,8 @@ public class PlayerController : MonoBehaviour
         YMouseSens = mouseSens;
         XMouseSens = mouseSens;
 
-        ammoRemaining = ammoMax;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = Screen.currentResolution.refreshRate;
     }
 
     void Start()
@@ -89,13 +95,17 @@ public class PlayerController : MonoBehaviour
         reloadTimeRemainig = reloadTimeMax;
         ammoText.text = ammoRemaining.ToString() + "/" + ammoMax.ToString();
 
-        healthText.text = PlayerController.health.ToString() + " HP";
-        //Application.targetFrameRate = 144;
+        healthText.text = PlayerController.health.ToString() + " HP"; 
     }
 
     // Update is called once per frame
     void Update()
     {
+        time.text = "Time: " + TimePlayed.timePlayed.ToString("n2");
+
+        //check if player is touching ground
+        isGrounded = groundTrigger.isGrounded;
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             PauseMenu.SetActive(true);
@@ -103,8 +113,8 @@ public class PlayerController : MonoBehaviour
             Level.SetActive(false);
         }
 
-        //Check for health
-        if (health <= 0)
+        //Check for health or F1 to reset
+        if (health <= 0 || Input.GetKeyDown(KeyCode.F1))
         {
             TimePlayed.timePlayed = 0F;
             health = 100;
@@ -134,9 +144,10 @@ public class PlayerController : MonoBehaviour
         //get player velocity
         ZAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).z;
         XAxisVelocity = rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).x;
+        
 
         #region MaxSpeed
-        //determine max enemyAiScript player can reach
+        //determine max speed player can reach
         if (isGrounded == true && Input.GetAxisRaw("run") > 0)
         {
             maxSpeed = maxSpeedRun;
@@ -152,7 +163,7 @@ public class PlayerController : MonoBehaviour
             maxSpeed = maxSpeedAir;
             speed = speedAir;
         }
-        
+
         //check if player is moveing in 2 directions
         if (XAxisInput != 0 && ZAxisInput != 0)
         {
@@ -164,11 +175,12 @@ public class PlayerController : MonoBehaviour
         {
             maxSpeedCombined = maxSpeed*1.25f;
         }
+        //maxSpeedCombined = maxSpeed * 2f;
         #endregion
 
         #region CanSeedUp
-        //player can enemyAiScript up if he didnt reach max velocity
-        if (((ZAxisInput > 0 && ZAxisVelocity > maxSpeed) || (ZAxisInput < 0 && ZAxisVelocity < maxSpeed * -1)) || (isGrounded && Mathf.Abs(ZAxisVelocity) + Mathf.Abs(XAxisVelocity) > maxSpeedCombined))
+        //player can speed up if he didnt reach max velocity
+        /*if (((ZAxisInput > 0 && ZAxisVelocity > maxSpeed) || (ZAxisInput < 0 && ZAxisVelocity < maxSpeed * -1)) || (isGrounded && Mathf.Abs(ZAxisVelocity) + Mathf.Abs(XAxisVelocity) > maxSpeedCombined))
         {
             ZAxisCanSpeedUp = 0;
         }
@@ -184,11 +196,57 @@ public class PlayerController : MonoBehaviour
         else
         {
             XAxisCanSpeedUp = 1;
+        }*/
+        if (ZAxisInput != 0 && XAxisInput != 0)
+        {
+            if (Mathf.Abs(ZAxisVelocity) + Mathf.Abs(XAxisVelocity) > maxSpeedCombined)
+            {
+                ZAxisCanSpeedUp = 0;
+                XAxisCanSpeedUp = 0;
+            }
+            else
+            {
+                ZAxisCanSpeedUp = 1;
+                XAxisCanSpeedUp = 1;
+            }
+        }
+        else
+        {
+            if (Mathf.Abs(ZAxisVelocity) > maxSpeed)
+            {
+                ZAxisCanSpeedUp = 0;
+            }
+            else
+            {
+                ZAxisCanSpeedUp = 1;
+            }
+
+            if (Mathf.Abs(XAxisVelocity) > maxSpeed)
+            {
+                XAxisCanSpeedUp = 0;
+            }
+            else
+            {
+                XAxisCanSpeedUp = 1;
+            }
+        }
+        
+        if (XAxisInput != 0 || ZAxisInput != 0)
+        {
+             velocity = new Vector3(XAxisInput * speed * XAxisCanSpeedUp, 0F, ZAxisInput * speed * ZAxisCanSpeedUp);
+        }
+        else
+        {
+            velocity = new Vector3(0F, 0F, 0F);
+        }
+
+        if (isGrounded)
+        {   
+            velocity += new Vector3(rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).x * -1f * drag, 0F, rbPlayer.transform.InverseTransformDirection(rbPlayer.velocity).z * -1 * drag);
         }
         #endregion
+
         
-        //check if player is touching ground
-        isGrounded = groundTrigger.isGrounded;
 
         #region Jumping
         //get jump input with buffer
@@ -221,7 +279,7 @@ public class PlayerController : MonoBehaviour
         //adding force to player, ending jump
         if (jump == true)
         {
-            rbPlayer.AddRelativeForce(new Vector3(0f, 300f, 0f));
+            rbPlayer.AddRelativeForce(new Vector3(0f, 225f, 0f));
             jump = false;
         }
         #endregion
@@ -261,10 +319,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (XAxisInput != 0 || ZAxisInput != 0)
-        {
-            rbPlayer.AddRelativeForce(new Vector3(XAxisInput * speed * XAxisCanSpeedUp, 0F, ZAxisInput * speed * ZAxisCanSpeedUp));
-        }
+        rbPlayer.AddRelativeForce(velocity);
     }
 
     public void OnCollisionEnter(Collision collision)
